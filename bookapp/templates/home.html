@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1> Books </h1>
+    <ul>
+    {% for book in object_list %}
+        <li>
+            <a href="{% url 'book_details' book.pk %}">{{ book.title }}</a> - {{ book.author}}  |  (Discussion Date: {{ book.discussion_date }} 
+            {% if book.is_current == True %}
+                 ** [Current Club Book]
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    <br>
+    <a href="{% url 'add_book' %}" class="btn btn-secondary">Add Book</a>
+
+{% endblock %}

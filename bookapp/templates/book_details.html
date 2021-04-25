@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+
+    {% if book.is_current == True %}
+    <h1>Current Club Book!!</h1>
+    {% endif %}
+    <h1>{{ book.title }}</h1>
+    <h2>By: {{ book.author }}</h2><br/>
+    <h3>Category: {{ book.category }}</h3>
+    <hr>
+    <br/>
+    <h3>Discussion Date: {{ book.discussion_date }}</h3>
+    <p>{{ book.summary }}</p>
+    <h5>Purchase here: {{ book.purchase_link }}</h5>
+    <small>Added by: {{book.uploaded_by}} at {{ book.created_at }}</small>
+    <small>Last updated at: {{book.updated_at}}</small>
+    <br>
+    {% if user.is_authenticated %}
+        <a href="{% url 'update_book' book.pk %}" class="btn btn-primary">Update Book</a>
+        <a href="{% url 'delete_book' book.pk %}" class="btn btn-warning">Delete Book</a>
+    {% endif %}
+    <br>
+    <br>
+    <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+{% endblock %}
